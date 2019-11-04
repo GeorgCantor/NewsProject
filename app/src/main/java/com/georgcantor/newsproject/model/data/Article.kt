@@ -36,6 +36,7 @@ data class Article(
     @ColumnInfo(name = Article.Column.publishedAt)
     @SerializedName(Article.Column.publishedAt)
     val publishedAt: String? = null
+
 ) {
 
     object Article {
