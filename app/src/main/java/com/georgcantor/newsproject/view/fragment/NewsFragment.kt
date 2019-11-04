@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.georgcantor.newsproject.util.getViewModel
+import com.georgcantor.newsproject.viewmodel.NewsViewModel
 
 class NewsFragment : Fragment() {
+
+    private val viewModel by lazy { getViewModel<NewsViewModel>() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
