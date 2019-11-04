@@ -13,5 +13,5 @@ data class NewsResponse(
     val sortBy: String = "",
 
     @SerializedName("articles")
-    val articles: List<Article> = emptyList()
+    val articles: List<NewsArticle> = emptyList()
 )
