@@ -33,9 +33,8 @@ fun FragmentActivity.toast(text: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, text, duration).show()
 }
 
-fun ViewGroup.inflate(layoutRes: Int): View {
-    return LayoutInflater.from(context).inflate(layoutRes, this, false)
-}
+fun ViewGroup.inflate(layoutRes: Int): View =
+    LayoutInflater.from(context).inflate(layoutRes, this, false)
 
 fun Context.getDrawableCompat(
     @DrawableRes resId: Int,

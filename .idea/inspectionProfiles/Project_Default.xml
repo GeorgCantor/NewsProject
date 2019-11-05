@@ -1,0 +1,31 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="AndroidLintKotlinPropertyAccess" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintLambdaLast" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BigDecimalEquals" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="Convert2streamapi" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="ConvertLambdaToReference" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="FieldCanBeLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="EXCLUDE_ANNOS">
+        <value>
+          <list size="1">
+            <item index="0" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
+          </list>
+        </value>
+      </option>
+      <option name="IGNORE_FIELDS_USED_IN_MULTIPLE_METHODS" value="true" />
+    </inspection_tool>
+    <inspection_tool class="FieldMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MethodMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_onlyPrivateOrFinal" value="false" />
+      <option name="m_ignoreEmptyMethods" value="true" />
+    </inspection_tool>
+    <inspection_tool class="UnnecessaryParentheses" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreClarifyingParentheses" value="false" />
+      <option name="ignoreParenthesesOnConditionals" value="false" />
+      <option name="ignoreParenthesesOnLambdaParameter" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UseExpressionBody" enabled="true" level="WARNING" enabled_by_default="true" />
+  </profile>
+</component>

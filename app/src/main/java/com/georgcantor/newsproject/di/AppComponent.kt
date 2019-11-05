@@ -4,10 +4,19 @@ import android.app.Application
 import com.georgcantor.newsproject.MyApp
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [])
+@Component(
+    modules = [
+        AndroidInjectionModule::class,
+        DatabaseModule::class,
+        ApiServiceModule::class,
+        ActivityModule::class,
+        ViewModelModule::class
+    ]
+)
 interface AppComponent {
 
     @Component.Builder
