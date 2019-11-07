@@ -1,5 +1,6 @@
 package com.georgcantor.newsproject.di
 
+import com.georgcantor.newsproject.model.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
