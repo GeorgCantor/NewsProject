@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.model.ViewState
+import com.georgcantor.newsproject.util.getViewModel
 import com.georgcantor.newsproject.util.observeNotNull
 import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
@@ -17,11 +18,7 @@ import kotlinx.android.synthetic.main.fragment_news.*
 class NewsFragment : Fragment() {
 
     private lateinit var adapter: NewsAdapter
-    private lateinit var viewModel: NewsViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val viewModel by lazy { getViewModel<NewsViewModel>() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
