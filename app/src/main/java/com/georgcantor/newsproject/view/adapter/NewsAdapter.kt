@@ -33,7 +33,7 @@ class NewsAdapter(private val context: Context) : RecyclerView.Adapter<NewsAdapt
         holder.articleTextView.text = news[position].description
 
         Glide.with(context)
-            .load(news[position].url)
+            .load(news[position].urlToImage)
             .placeholder(R.drawable.ic_launcher_background)
             .into(holder.articleImageView)
 
