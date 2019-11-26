@@ -9,11 +9,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class Repository @Inject constructor(
+class Repository(
     private val dao: NewsDao,
     private val apiService: ApiService
 ) {

@@ -1,23 +1,21 @@
 package com.georgcantor.newsproject
 
 import android.app.Application
-import com.georgcantor.newsproject.di.base.AppInjector
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
-import javax.inject.Inject
+import com.georgcantor.newsproject.di.appModule
+import com.georgcantor.newsproject.di.repositoryModule
+import com.georgcantor.newsproject.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
-class MyApp : Application(), HasAndroidInjector {
-
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        AppInjector.init(this)
+        startKoin {
+            androidContext(this@MyApp)
+            modules(arrayListOf(appModule, viewModelModule, repositoryModule))
+        }
     }
-
-    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
 }
