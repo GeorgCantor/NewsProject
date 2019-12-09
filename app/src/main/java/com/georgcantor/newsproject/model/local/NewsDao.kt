@@ -9,18 +9,18 @@ import androidx.room.Query
 interface NewsDao {
 
     @Insert
-    suspend fun insertArticle(article: NewsArticle)
+    suspend fun insertArticle(article: Article)
 
     @Delete
-    suspend fun deleteArticle(article: NewsArticle)
+    suspend fun deleteArticle(article: Article)
 
-    @Query("SELECT * FROM NewsArticle")
-    suspend fun getAllArticles(): List<NewsArticle>
+    @Query("SELECT * FROM Article")
+    suspend fun getAllArticles(): List<Article>
 
-    @Query("SELECT * FROM NewsArticle where id == :id")
-    suspend fun getArticleById(id: Int): List<NewsArticle>
+    @Query("SELECT * FROM Article where id == :id")
+    suspend fun getArticleById(id: Int): Article
 
-    @Query("DELETE FROM NewsArticle")
+    @Query("DELETE FROM Article")
     suspend fun deleteAllArticles()
 
 }

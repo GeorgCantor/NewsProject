@@ -1,11 +1,11 @@
 package com.georgcantor.newsproject.repository
 
-import com.georgcantor.newsproject.model.local.NewsArticle
+import com.georgcantor.newsproject.model.local.Article
 
 interface INewsRepository {
 
-    suspend fun getNews(): List<NewsArticle>
+    suspend fun getNews(): List<Article>
 
-    suspend fun getNewsArticle(id: Int): NewsArticle?
+    suspend fun getArticleById(id: Int): Article?
 
 }
