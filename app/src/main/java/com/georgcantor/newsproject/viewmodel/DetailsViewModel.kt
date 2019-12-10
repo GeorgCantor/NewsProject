@@ -3,9 +3,9 @@ package com.georgcantor.newsproject.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.georgcantor.newsproject.model.local.Article
-import com.georgcantor.newsproject.repository.INewsRepository
+import com.georgcantor.newsproject.repository.NewsRepository
 
-class DetailsViewModel(private val repository: INewsRepository) : NewsViewModel() {
+class DetailsViewModel(private val repository: NewsRepository) : BaseViewModel() {
 
     private val articleLiveData = MutableLiveData<Article>()
 

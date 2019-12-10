@@ -1,33 +1,22 @@
 package com.georgcantor.newsproject.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.georgcantor.newsproject.model.local.Article
+import com.georgcantor.newsproject.repository.NewsRepository
 
-open class NewsViewModel : ViewModel() {
+class NewsViewModel(private val repository: NewsRepository) : BaseViewModel() {
 
-    private val progressLiveData = MutableLiveData<Boolean>()
+    private val newsLiveData = MutableLiveData<List<Article>>()
 
-    val isProgressShow: MutableLiveData<Boolean>
-        get() = progressLiveData
+    val news: LiveData<List<Article>>
+        get() = newsLiveData
 
-    protected fun <T : Any> loadData(
-        block: suspend (() -> T?),
-        callback: ((T?) -> Unit)
-    ): Job {
-        return viewModelScope.launch(Dispatchers.Main) {
-            progressLiveData.value = true
-
-            val data = withContext(viewModelScope.coroutineContext + Dispatchers.IO) {
-                block()
-            }
-            callback(data)
-
-            progressLiveData.value = false
+    fun fetchNews() {
+        loadData({
+            repository.getNews()
+        }) {
+            newsLiveData.value = it
         }
     }
 

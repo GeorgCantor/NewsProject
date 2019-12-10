@@ -9,9 +9,9 @@ import retrofit2.await
 class NewsRepository(
     private val apiService: ApiService,
     private val dao: NewsDao
-) : INewsRepository {
+)  {
 
-    override suspend fun getNews(): List<Article> {
+    suspend fun getNews(): List<Article> {
         dao.deleteAllArticles()
 
         val news = apiService.getNews(BuildConfig.API_KEY).await()
@@ -32,6 +32,6 @@ class NewsRepository(
         return dao.getAllArticles()
     }
 
-    override suspend fun getArticleById(id: Int): Article? = dao.getArticleById(id)
+    suspend fun getArticleById(id: Int): Article? = dao.getArticleById(id)
 
 }

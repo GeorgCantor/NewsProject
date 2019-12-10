@@ -22,10 +22,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.georgcantor.newsproject.R
 
-fun AppCompatActivity.openFragment(fragment: Fragment, tag: String) {
+fun AppCompatActivity.openFragment(fragment: Fragment) {
     val transaction = supportFragmentManager.beginTransaction()
-    val lastIndex = supportFragmentManager.fragments.lastIndex
-    val current = supportFragmentManager.fragments[lastIndex]
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) transaction.setCustomAnimations(
         R.anim.pull_in_right,
@@ -34,19 +32,9 @@ fun AppCompatActivity.openFragment(fragment: Fragment, tag: String) {
         R.anim.push_out_right
     )
 
-    when {
-        fragment == current -> return
-        fragment.isAdded -> {
-            transaction.replace(R.id.frameContainer, fragment)
-            transaction.addToBackStack(tag)
-            transaction.commit()
-        }
-        else -> {
-            transaction.add(R.id.frameContainer, fragment)
-            transaction.addToBackStack(tag)
-            transaction.commit()
-        }
-    }
+    transaction.replace(R.id.frameContainer, fragment)
+    transaction.addToBackStack(null)
+    transaction.commit()
 }
 
 fun <T> Context.openActivity(it: Class<T>, extras: Bundle.() -> Unit = {}) {
@@ -147,14 +135,13 @@ fun Context.showDialog(
 
 fun Context.loadImage(
     url: String,
-    drawable: Drawable,
     view: ImageView,
     animView: LottieAnimationView?
 ) {
 
     Glide.with(this)
         .load(url)
-        .placeholder(drawable)
+        .placeholder(R.drawable.ic_launcher_background)
         .thumbnail(0.1F)
         .listener(object : RequestListener<Drawable> {
             override fun onLoadFailed(
