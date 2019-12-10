@@ -44,7 +44,7 @@ class NewsFragment : Fragment() {
     private fun getNews() {
         newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         viewModel.news.observe(viewLifecycleOwner, Observer {
-            newsRecyclerView.adapter = NewsAdapter(it, requireContext()) { article ->
+            newsRecyclerView.adapter = NewsAdapter(it) { article ->
                 requireContext().shortToast(article.title.toString())
             }
         })

@@ -1,6 +1,5 @@
 package com.georgcantor.newsproject.view.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import kotlinx.android.synthetic.main.news_item.view.*
 
 class NewsAdapter(
     news: List<Article>,
-    private val context: Context,
     private val clickListener: (Article) -> Unit
 ) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
@@ -39,10 +37,12 @@ class NewsAdapter(
     override fun getItemCount(): Int = news.size
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        holder.articleTextView.text = news[position].description
+//        holder.title.text = news[position].title
+        holder.description.text = news[position].description
+//        holder.date.text = news[position].publishedAt
 
-        context.loadImage(
-            news[position].url ?: "",
+        holder.articleImageView.context.loadImage(
+            news[position].imageUrl ?: "",
             holder.articleImageView,
             null
         )
@@ -50,7 +50,9 @@ class NewsAdapter(
 
     class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val articleImageView: ImageView = view.newsImageView
-        val articleTextView: TextView = view.newsTextView
+//        val title: TextView = view.titleTextView
+        val description: TextView = view.descriptionTextView
+//        val date: TextView = view.dateTextView
     }
 
 }
