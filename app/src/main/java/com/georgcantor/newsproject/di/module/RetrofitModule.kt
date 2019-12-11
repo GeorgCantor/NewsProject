@@ -21,12 +21,14 @@ class RetrofitModule {
 
     @Provides
     @ApplicationScope
-    fun provideRetrofit(httpClient: OkHttpClient, gson: Gson): Retrofit =
-        Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
-            .client(httpClient)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
+    fun provideRetrofit(
+        httpClient: OkHttpClient,
+        gson: Gson
+    ): Retrofit = Retrofit.Builder()
+        .baseUrl(BuildConfig.BASE_URL)
+        .client(httpClient)
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
 
     @Provides
     @ApplicationScope
@@ -42,8 +44,9 @@ class RetrofitModule {
 
     @Provides
     @ApplicationScope
-    fun provideInterceptor(): Interceptor = Interceptor { chain ->
-        val request = chain.request()
+    fun provideInterceptor(): Interceptor = Interceptor {
+        val request = it.request()
+
         val url = request
             .url()
             .newBuilder()
@@ -55,7 +58,7 @@ class RetrofitModule {
             .url(url)
             .build()
 
-        chain.proceed(newRequest)
+        it.proceed(newRequest)
     }
 
 }
