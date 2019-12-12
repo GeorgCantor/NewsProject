@@ -1,7 +1,31 @@
 package com.georgcantor.newsproject.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.georgcantor.newsproject.base.BaseViewModel
+import com.georgcantor.newsproject.datasource.NewsDataSource
+import com.georgcantor.newsproject.datasource.NewsDataSourceFactory
+import com.georgcantor.newsproject.model.remote.NetworkState
 import com.georgcantor.newsproject.repository.NewsRepository
 
 class NewsViewModel(repository: NewsRepository) : BaseViewModel() {
+
+    private val newsDataSource = NewsDataSourceFactory(repository, ioScope)
+
+    val news = LivePagedListBuilder(newsDataSource, pagedListConfig()).build()
+    val networkState: LiveData<NetworkState>? = Transformations.switchMap(
+        newsDataSource.source,
+        NewsDataSource::getNetworkState
+    )
+
+    fun getNews() = newsDataSource.updateQuery()
+
+    private fun pagedListConfig() = PagedList.Config.Builder()
+        .setInitialLoadSizeHint(5)
+        .setEnablePlaceholders(false)
+        .setPageSize(5 * 2)
+        .build()
+
 }

@@ -7,14 +7,21 @@ import com.georgcantor.newsproject.repository.NewsRepository
 import kotlinx.coroutines.CoroutineScope
 
 class NewsDataSourceFactory(
-    repository: NewsRepository,
-    scope: CoroutineScope
+    private val repository: NewsRepository,
+    private val scope: CoroutineScope
 ) : DataSource.Factory<Int, Article>() {
 
     val source = MutableLiveData<NewsDataSource>()
 
     override fun create(): DataSource<Int, Article> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val source = NewsDataSource(repository, scope)
+        this.source.postValue(source)
+
+        return source
     }
+
+    fun getSource() = source.value
+
+    fun updateQuery() = getSource()?.refresh()
 
 }

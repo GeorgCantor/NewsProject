@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("top-headlines?country=us")
-    fun getNews(
+    fun getNewsAsync(
         @Query("page") page: Int,
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): Deferred<News>
