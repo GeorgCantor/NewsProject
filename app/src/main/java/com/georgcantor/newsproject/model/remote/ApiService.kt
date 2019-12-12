@@ -10,6 +10,7 @@ interface ApiService {
 
     @GET("top-headlines?country=us")
     fun getNews(
+        @Query("page") page: Int,
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): Deferred<News>
 
