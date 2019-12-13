@@ -8,7 +8,7 @@ data class Article(
 
     var url: String,
 
-    var urlToImage: String,
+    var urlToImage: String?,
 
     var publishedAt: String,
 

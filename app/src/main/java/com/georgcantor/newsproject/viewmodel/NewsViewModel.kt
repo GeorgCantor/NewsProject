@@ -20,7 +20,7 @@ class NewsViewModel(repository: NewsRepository) : BaseViewModel() {
         NewsDataSource::getNetworkState
     )
 
-    fun getNews() = newsDataSource.updateQuery()
+    fun getNews() = newsDataSource.create()
 
     private fun pagedListConfig() = PagedList.Config.Builder()
         .setInitialLoadSizeHint(5)

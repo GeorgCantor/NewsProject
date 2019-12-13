@@ -20,8 +20,4 @@ class NewsDataSourceFactory(
         return source
     }
 
-    fun getSource() = source.value
-
-    fun updateQuery() = getSource()?.refresh()
-
 }

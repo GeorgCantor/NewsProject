@@ -28,7 +28,7 @@ class NewsAdapter(private val listener: OnClickListener) :
 
         fun onClickRetry()
 
-        fun whenListIsUpdated(size: Int, networkState: NetworkState?)
+        fun onListUpdated(size: Int, networkState: NetworkState?)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -59,7 +59,7 @@ class NewsAdapter(private val listener: OnClickListener) :
     }
 
     override fun getItemCount(): Int {
-        this.listener.whenListIsUpdated(super.getItemCount(), this.networkState)
+        this.listener.onListUpdated(super.getItemCount(), this.networkState)
         return super.getItemCount()
     }
 
