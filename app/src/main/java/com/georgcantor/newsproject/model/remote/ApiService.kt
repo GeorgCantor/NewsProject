@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("top-headlines?country=us")
+    @GET("everything?q=nfl&sortBy=popularity?country=us")
     fun getNewsAsync(
         @Query("page") page: Int,
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY

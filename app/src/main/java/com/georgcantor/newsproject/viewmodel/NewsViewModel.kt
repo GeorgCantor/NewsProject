@@ -22,6 +22,8 @@ class NewsViewModel(repository: NewsRepository) : BaseViewModel() {
 
     fun getNews() = newsDataSource.create()
 
+    fun retry() = newsDataSource.source.value?.retryFailedQuery()
+
     private fun pagedListConfig() = PagedList.Config.Builder()
         .setInitialLoadSizeHint(5)
         .setEnablePlaceholders(false)

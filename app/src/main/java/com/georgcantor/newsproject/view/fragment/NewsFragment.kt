@@ -10,6 +10,7 @@ import com.georgcantor.newsproject.model.remote.NetworkState
 import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
 import kotlinx.android.synthetic.main.fragment_news.*
+import kotlinx.android.synthetic.main.item_network_state.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -37,14 +38,21 @@ class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
     }
 
     override fun onClickRetry() {
+        viewModel.retry()
     }
 
     override fun onListUpdated(size: Int, networkState: NetworkState?) {
+        setUpProgressBar(size, networkState)
     }
 
     private fun getNews() {
         viewModel.networkState?.observe(viewLifecycleOwner, Observer(adapter::updateNetworkState))
         viewModel.news.observe(viewLifecycleOwner, Observer(adapter::submitList))
+    }
+
+    private fun setUpProgressBar(size: Int, networkState: NetworkState?) {
+        progressBar?.visibility =
+            if (networkState == NetworkState.RUNNING) View.VISIBLE else View.GONE
     }
 
 }
