@@ -1,13 +1,16 @@
 package com.georgcantor.newsproject.view.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.model.data.Article
 import com.georgcantor.newsproject.model.remote.NetworkState
 
-class NewsAdapter : PagedListAdapter<Article, RecyclerView.ViewHolder>(diffCallback) {
+class NewsAdapter(private val listener: OnClickListener) :
+    PagedListAdapter<Article, RecyclerView.ViewHolder>(diffCallback) {
 
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<Article>() {
@@ -22,16 +25,60 @@ class NewsAdapter : PagedListAdapter<Article, RecyclerView.ViewHolder>(diffCallb
     private var networkState: NetworkState? = null
 
     interface OnClickListener {
+
         fun onClickRetry()
+
         fun whenListIsUpdated(size: Int, networkState: NetworkState?)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
+        return when (viewType) {
+            R.layout.news_item -> NewsViewHolder(view)
+            R.layout.item_network_state -> NetworkStateViewHolder(view)
+            else -> throw IllegalArgumentException("Unknown viewType: $viewType")
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        when (getItemViewType(position)) {
+            R.layout.news_item -> (holder as NewsViewHolder).bindTo(getItem(position))
+            R.layout.item_network_state -> (holder as NetworkStateViewHolder).bindTo(
+                networkState,
+                listener
+            )
+        }
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (hasExtraRow() && position == itemCount - 1) {
+            R.layout.item_network_state
+        } else {
+            R.layout.news_item
+        }
+    }
+
+    override fun getItemCount(): Int {
+        this.listener.whenListIsUpdated(super.getItemCount(), this.networkState)
+        return super.getItemCount()
+    }
+
+    fun updateNetworkState(newNetworkState: NetworkState?) {
+        val previousState = this.networkState
+        val hadExtraRow = hasExtraRow()
+        this.networkState = newNetworkState
+        val hasExtraRow = hasExtraRow()
+        if (hadExtraRow != hasExtraRow) {
+            if (hadExtraRow) {
+                notifyItemRemoved(super.getItemCount())
+            } else {
+                notifyItemInserted(super.getItemCount())
+            }
+        } else if (hasExtraRow && previousState != newNetworkState) {
+            notifyItemChanged(itemCount - 1)
+        }
+    }
+
+    private fun hasExtraRow() = networkState != null && networkState != NetworkState.SUCCESS
 
 }
