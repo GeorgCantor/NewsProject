@@ -52,7 +52,7 @@ class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
     private fun setUpProgressBar(size: Int, networkState: NetworkState?) {
         progressBar?.visibility =
-            if (networkState == NetworkState.RUNNING) View.VISIBLE else View.GONE
+            if (size == 0 && networkState == NetworkState.RUNNING) View.VISIBLE else View.GONE
     }
 
 }
