@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">NewsProject</string>
     <string name="news_image">news image</string>
+    <string name="tools_title">Start building an app</string>
+    <string name="tools_description">Whether you’re an experienced developer or creating your first Android app, here are some resources to get you started.</string>
 </resources>
