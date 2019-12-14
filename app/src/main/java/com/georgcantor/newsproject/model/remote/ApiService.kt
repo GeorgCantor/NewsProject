@@ -8,9 +8,11 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("everything?q=nfl&sortBy=popularity?country=us")
+    @GET("everything")
     fun getNewsAsync(
+        @Query("q") query: String,
         @Query("page") page: Int,
+        @Query("sortBy") sortBy: String = "popularity",
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): Deferred<News>
 

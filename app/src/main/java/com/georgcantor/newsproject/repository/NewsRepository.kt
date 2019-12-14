@@ -4,6 +4,9 @@ import com.georgcantor.newsproject.model.remote.ApiService
 
 class NewsRepository(private val apiService: ApiService) {
 
-    suspend fun getNews(page: Int) = apiService.getNewsAsync(page).await().articles
+    suspend fun getNews(
+        query: String,
+        page: Int
+    ) = apiService.getNewsAsync(query, page).await().articles
 
 }

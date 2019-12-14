@@ -10,6 +10,7 @@ import kotlinx.coroutines.*
 
 class NewsDataSource(
     private val repository: NewsRepository,
+    private val query: String,
     private val scope: CoroutineScope
 ) : PageKeyedDataSource<Int, Article>() {
 
@@ -44,7 +45,7 @@ class NewsDataSource(
     private fun executeQuery(page: Int, perPage: Int, callback: (List<Article>) -> Unit) {
         networkState.postValue(NetworkState.RUNNING)
         scope.launch(getJobErrorHandler() + supervisorJob) {
-            val news = repository.getNews(page)
+            val news = repository.getNews(query, page)
             retryQuery = null
             networkState.postValue(NetworkState.SUCCESS)
             callback(news)

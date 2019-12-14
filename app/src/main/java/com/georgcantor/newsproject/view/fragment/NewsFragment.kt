@@ -21,7 +21,7 @@ class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = getViewModel { parametersOf() }
+        viewModel = getViewModel { parametersOf("politics") }
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_news

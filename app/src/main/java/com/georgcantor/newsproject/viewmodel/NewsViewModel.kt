@@ -10,9 +10,12 @@ import com.georgcantor.newsproject.datasource.NewsDataSourceFactory
 import com.georgcantor.newsproject.model.remote.NetworkState
 import com.georgcantor.newsproject.repository.NewsRepository
 
-class NewsViewModel(repository: NewsRepository) : BaseViewModel() {
+class NewsViewModel(
+    repository: NewsRepository,
+    query: String
+) : BaseViewModel() {
 
-    private val newsDataSource = NewsDataSourceFactory(repository, ioScope)
+    private val newsDataSource = NewsDataSourceFactory(repository, query, ioScope)
 
     val news = LivePagedListBuilder(newsDataSource, pagedListConfig()).build()
     val networkState: LiveData<NetworkState>? = Transformations.switchMap(

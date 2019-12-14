@@ -11,12 +11,11 @@ val repositoryModule = module {
 }
 
 val viewModelModule = module {
-    viewModel {
-        NewsViewModel(get())
+    viewModel { (query: String) ->
+        NewsViewModel(get(), query)
     }
 }
 
 val appModule = module {
     single { ApiClient.create(get()) }
-//    single { NewsDatabase.buildDefault(get()).dao() }
 }
