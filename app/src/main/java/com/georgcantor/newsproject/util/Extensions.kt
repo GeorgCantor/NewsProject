@@ -11,20 +11,12 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.georgcantor.newsproject.R
-
-fun AppCompatActivity.openFragment(fragment: Fragment) {
-    val transaction = supportFragmentManager.beginTransaction()
-    transaction.replace(R.id.frameContainer, fragment)
-    transaction.addToBackStack(null)
-    transaction.commit()
-}
 
 fun <T> Context.openActivity(it: Class<T>, extras: Bundle.() -> Unit = {}) {
     val context = this as AppCompatActivity

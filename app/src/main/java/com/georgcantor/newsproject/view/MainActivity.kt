@@ -2,9 +2,8 @@ package com.georgcantor.newsproject.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import com.georgcantor.newsproject.R
-import com.georgcantor.newsproject.util.openFragment
-import com.georgcantor.newsproject.view.fragment.NewsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        openFragment(NewsFragment())
+        Navigation.findNavController(this, R.id.navHostFragment).navigate(R.id.tabsFragment)
     }
 
 }

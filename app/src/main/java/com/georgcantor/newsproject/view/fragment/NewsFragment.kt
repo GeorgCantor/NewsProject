@@ -16,12 +16,26 @@ import org.koin.core.parameter.parametersOf
 
 class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
+    companion object {
+        private const val QUERY = "query"
+
+        fun newInstance(query: String): NewsFragment {
+            val bundle = Bundle()
+            bundle.putString(QUERY, query)
+            val fragment = NewsFragment()
+            fragment.arguments = bundle
+
+            return fragment
+        }
+
+    }
+
     private lateinit var viewModel: NewsViewModel
     private lateinit var adapter: NewsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = getViewModel { parametersOf("politics") }
+        viewModel = getViewModel { parametersOf(arguments?.get(QUERY)) }
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_news
