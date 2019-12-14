@@ -10,6 +10,8 @@ class NewsViewHolder(private val parent: View) : RecyclerView.ViewHolder(parent)
 
     fun bindTo(article: Article?) {
         article?.let {
+            itemView.publishedTextView.text = it.publishedAt
+            itemView.titleTextView.text = it.title
             itemView.descriptionTextView.text = it.description
             parent.context.loadImage(it.urlToImage ?: "", itemView.newsImageView)
         }

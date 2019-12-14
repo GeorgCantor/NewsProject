@@ -1,44 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:elevation="8dp"
+    card_view:cardCornerRadius="0dp">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:selectableItemBackground"
-        android:elevation="8dp"
-        android:orientation="vertical"
-        android:padding="5dp"
-        app:cardCornerRadius="5dp"
-        app:cardUseCompatPadding="true">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/newsImageView"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:contentDescription="@string/news_image"
+            android:scaleType="centerCrop"
+            card_view:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_background" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:selectableItemBackground"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            card_view:layout_constraintTop_toBottomOf="@+id/newsImageView">
 
-            <ImageView
-                android:id="@+id/newsImageView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/ic_launcher_background" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:id="@+id/publishedTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="2"
+                    tools:text="Published Time" />
+
+                <ImageView
+                    android:id="@+id/shareButton"
+                    android:layout_width="0dp"
+                    android:layout_height="17dp"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:contentDescription="@null"
+                    android:focusable="true"
+                    card_view:srcCompat="@drawable/ic_share" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:maxLines="2"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="@string/app_name" />
 
             <TextView
                 android:id="@+id/descriptionTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:maxLines="2"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                tools:text="Description" />
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</RelativeLayout>
+</androidx.cardview.widget.CardView>
