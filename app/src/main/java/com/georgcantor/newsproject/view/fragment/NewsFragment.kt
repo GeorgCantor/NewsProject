@@ -27,7 +27,6 @@ class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
             return fragment
         }
-
     }
 
     private lateinit var viewModel: NewsViewModel
