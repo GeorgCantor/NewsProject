@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_abc"
+            android:icon="@drawable/ic_bookmark_border_black"
+            android:title="ABC" />
+
+        <item
+            android:id="@+id/nav_bbc"
+            android:icon="@drawable/ic_share"
+            android:title="BBC" />
+
+    </group>
+
+    <item android:title="Info">
+
+        <menu>
+
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_share"
+                android:title="About app" />
+
+            <item
+                android:id="@+id/nav_rate_us"
+                android:icon="@drawable/ic_bookmark_border_black"
+                android:title="Rate us" />
+
+        </menu>
+
+    </item>
+
+</menu>
