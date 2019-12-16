@@ -3,9 +3,11 @@ package com.georgcantor.newsproject.view.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.base.BaseFragment
+import com.georgcantor.newsproject.model.data.Article
 import com.georgcantor.newsproject.model.remote.NetworkState
 import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
@@ -52,6 +54,11 @@ class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
     override fun onClickRetry() {
         viewModel.retry()
+    }
+
+    override fun onItemClick(article: Article) {
+        viewModel.setArticle(article)
+        view?.let { Navigation.findNavController(it).navigate(R.id.articleFragment) }
     }
 
     override fun onListUpdated(size: Int, networkState: NetworkState?) {

@@ -8,11 +8,18 @@ import kotlinx.android.synthetic.main.news_item.view.*
 
 class NewsViewHolder(private val parent: View) : RecyclerView.ViewHolder(parent) {
 
-    fun bindTo(article: Article?) {
-        article?.let {
-            itemView.titleTextView.text = it.title
-            itemView.descriptionTextView.text = it.description
-            parent.context.loadImage(it.urlToImage ?: "", itemView.newsImageView)
+    fun bindTo(
+        article: Article?,
+        listener: NewsAdapter.OnClickListener
+    ) {
+        article?.let { art ->
+            itemView.titleTextView.text = art.title
+            itemView.descriptionTextView.text = art.description
+            parent.context.loadImage(art.urlToImage ?: "", itemView.newsImageView)
+
+            itemView.setOnClickListener {
+                listener.onItemClick(art)
+            }
         }
     }
 

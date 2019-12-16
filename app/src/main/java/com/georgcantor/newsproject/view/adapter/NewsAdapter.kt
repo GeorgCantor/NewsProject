@@ -28,6 +28,8 @@ class NewsAdapter(private val listener: OnClickListener) :
 
         fun onClickRetry()
 
+        fun onItemClick(article: Article)
+
         fun onListUpdated(size: Int, networkState: NetworkState?)
     }
 
@@ -42,7 +44,10 @@ class NewsAdapter(private val listener: OnClickListener) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.news_item -> (holder as NewsViewHolder).bindTo(getItem(position))
+            R.layout.news_item -> (holder as NewsViewHolder).bindTo(
+                getItem(position),
+                listener
+            )
             R.layout.item_network_state -> (holder as NetworkStateViewHolder).bindTo(
                 networkState,
                 listener

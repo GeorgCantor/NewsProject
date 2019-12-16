@@ -7,6 +7,11 @@
     <fragment
         android:id="@+id/tabsFragment"
         android:name="com.georgcantor.newsproject.view.fragment.TabsFragment"
-        android:label="NewsFragment" />
+        android:label="TabsFragment" />
+
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.georgcantor.newsproject.view.fragment.ArticleFragment"
+        android:label="ArticleFragment" />
 
 </navigation>
