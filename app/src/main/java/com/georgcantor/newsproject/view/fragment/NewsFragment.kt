@@ -13,7 +13,7 @@ import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
 import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.item_network_state.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.core.parameter.parametersOf
 
 class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
@@ -36,7 +36,7 @@ class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = getViewModel { parametersOf(arguments?.get(QUERY)) }
+        viewModel = getSharedViewModel { parametersOf(arguments?.get(QUERY)) }
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_news
