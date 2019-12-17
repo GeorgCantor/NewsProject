@@ -11,9 +11,11 @@ import com.georgcantor.newsproject.model.data.Article
 import com.georgcantor.newsproject.model.remote.NetworkState
 import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
+import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
 import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.item_network_state.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
 class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
@@ -32,11 +34,13 @@ class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
     }
 
     private lateinit var viewModel: NewsViewModel
+    private lateinit var shareDataViewModel: ShareDataViewModel
     private lateinit var adapter: NewsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = getSharedViewModel { parametersOf(arguments?.get(QUERY)) }
+        viewModel = getViewModel { parametersOf(arguments?.get(QUERY)) }
+        shareDataViewModel = getSharedViewModel { parametersOf() }
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_news
@@ -57,7 +61,7 @@ class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
     }
 
     override fun onItemClick(article: Article) {
-        viewModel.setArticle(article)
+        shareDataViewModel.setArticle(article)
         view?.let { Navigation.findNavController(it).navigate(R.id.articleFragment) }
     }
 
