@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.base.BaseFragment
@@ -14,16 +15,24 @@ import com.georgcantor.newsproject.model.data.Article
 import com.georgcantor.newsproject.model.remote.NetworkState
 import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
+import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.search_results.*
+import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
 class SearchFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
     private lateinit var viewModel: NewsViewModel
+    private lateinit var shareDataViewModel: ShareDataViewModel
     private lateinit var adapter: NewsAdapter
     private lateinit var manager: InputMethodManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        shareDataViewModel = getSharedViewModel { parametersOf() }
+    }
 
     override fun getLayoutId(): Int = R.layout.fragment_search
 
@@ -40,9 +49,12 @@ class SearchFragment : BaseFragment(), NewsAdapter.OnClickListener {
     }
 
     override fun onClickRetry() {
+        viewModel.retry()
     }
 
     override fun onItemClick(article: Article) {
+        shareDataViewModel.setArticle(article)
+        view?.let { Navigation.findNavController(it).navigate(R.id.articleFragment) }
     }
 
     override fun onListUpdated(size: Int, networkState: NetworkState?) {
