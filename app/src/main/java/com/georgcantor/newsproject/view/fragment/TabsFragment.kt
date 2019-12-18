@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.view.adapter.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -32,6 +33,15 @@ class TabsFragment : Fragment() {
             requireActivity().drawerLayout.openDrawer(GravityCompat.START)
         }
         toolbar.inflateMenu(R.menu.menu_main)
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.search -> {
+                    Navigation.findNavController(view).navigate(R.id.searchFragment)
+                    return@setOnMenuItemClickListener true
+                }
+                else -> return@setOnMenuItemClickListener false
+            }
+        }
         tabLayout.setupWithViewPager(viewPager)
 
         val adapter = ViewPagerAdapter(childFragmentManager)
@@ -41,5 +51,19 @@ class TabsFragment : Fragment() {
 
         viewPager.adapter = adapter
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.menu_main, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.search -> {
+//                view?.let { Navigation.findNavController(it).navigate(R.id.searchFragment) }
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
 }
