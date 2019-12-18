@@ -3,4 +3,7 @@
     <string name="news_image">news image</string>
     <string name="tools_title">Start building an app</string>
     <string name="tools_description">Whether you’re an experienced developer or creating your first Android app, here are some resources to get you started.</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 </resources>

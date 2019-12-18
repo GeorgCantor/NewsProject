@@ -4,12 +4,12 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_abc"
+            android:id="@+id/abc"
             android:icon="@drawable/ic_bookmark_border_black"
             android:title="ABC" />
 
         <item
-            android:id="@+id/nav_bbc"
+            android:id="@+id/bbc"
             android:icon="@drawable/ic_share"
             android:title="BBC" />
 
@@ -20,12 +20,12 @@
         <menu>
 
             <item
-                android:id="@+id/nav_about"
+                android:id="@+id/about"
                 android:icon="@drawable/ic_share"
                 android:title="About app" />
 
             <item
-                android:id="@+id/nav_rate_us"
+                android:id="@+id/rate_us"
                 android:icon="@drawable/ic_bookmark_border_black"
                 android:title="Rate us" />
 
