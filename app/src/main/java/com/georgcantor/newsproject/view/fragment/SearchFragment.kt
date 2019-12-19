@@ -39,8 +39,9 @@ class SearchFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkQuery()
         manager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        showKeyboard(searchView)
+        checkQuery()
 
         searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = NewsAdapter(this)
@@ -81,7 +82,7 @@ class SearchFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
     private fun checkQuery() {
         shareDataViewModel.query.observe(viewLifecycleOwner, Observer { query ->
-            if (query.isNullOrEmpty()) showKeyboard(searchView)
+            if (query.isNotEmpty()) hideKeyboard()
             view?.let {
                 viewModel = getViewModel { parametersOf(query) }
                 viewModel.getNews()
