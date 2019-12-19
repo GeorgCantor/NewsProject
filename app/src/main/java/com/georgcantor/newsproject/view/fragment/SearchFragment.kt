@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.newsproject.R
@@ -38,8 +39,8 @@ class SearchFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkQuery()
         manager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        showKeyboard(searchView)
 
         searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = NewsAdapter(this)
@@ -61,19 +62,31 @@ class SearchFragment : BaseFragment(), NewsAdapter.OnClickListener {
     }
 
     private fun setupRequest() {
+        val navOption = NavOptions.Builder().setLaunchSingleTop(true).build()
+
         searchView.requestFocus()
         searchView.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideKeyboard()
-                viewModel = getViewModel {
-                    parametersOf(searchView.text.toString().trim { it <= ' ' })
-                }
-                viewModel.getNews()
-                getNews()
+                shareDataViewModel.setQuery(searchView.text.toString().trim { it <= ' ' })
 
+                view?.let {
+                    Navigation.findNavController(it).navigate(R.id.searchFragment, null, navOption)
+                }
                 return@OnEditorActionListener true
             }
             false
+        })
+    }
+
+    private fun checkQuery() {
+        shareDataViewModel.query.observe(viewLifecycleOwner, Observer { query ->
+            if (query.isNullOrEmpty()) showKeyboard(searchView)
+            view?.let {
+                viewModel = getViewModel { parametersOf(query) }
+                viewModel.getNews()
+                getNews()
+            }
         })
     }
 
