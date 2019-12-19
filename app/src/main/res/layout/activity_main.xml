@@ -25,7 +25,7 @@
         android:background="@color/colorPrimaryDark"
         android:fitsSystemWindows="true"
         android:theme="@style/NavigationViewTheme"
-        app:itemTextColor="@color/colorPrimaryDark"
+        app:itemTextColor="@color/colorWhite"
         app:menu="@menu/menu_main_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

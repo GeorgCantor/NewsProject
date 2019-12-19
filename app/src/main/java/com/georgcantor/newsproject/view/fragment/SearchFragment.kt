@@ -38,8 +38,8 @@ class SearchFragment : BaseFragment(), NewsAdapter.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        manager =
-            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        manager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        showKeyboard(searchView)
 
         searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = NewsAdapter(this)
@@ -80,6 +80,11 @@ class SearchFragment : BaseFragment(), NewsAdapter.OnClickListener {
     private fun getNews() {
         viewModel.networkState?.observe(viewLifecycleOwner, Observer(adapter::updateNetworkState))
         viewModel.news.observe(viewLifecycleOwner, Observer(adapter::submitList))
+    }
+
+    private fun showKeyboard(view: View) {
+        view.requestFocus()
+        manager.showSoftInput(view, 0)
     }
 
     private fun hideKeyboard() {
