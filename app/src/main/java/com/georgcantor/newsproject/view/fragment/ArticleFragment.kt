@@ -3,6 +3,7 @@ package com.georgcantor.newsproject.view.fragment
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.content_article.*
 import kotlinx.android.synthetic.main.fragment_article.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.core.parameter.parametersOf
+
 
 class ArticleFragment : BaseFragment() {
 
@@ -28,8 +30,12 @@ class ArticleFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).setSupportActionBar(articleToolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewModel.article.observe(viewLifecycleOwner, Observer { article ->
+            articleToolbar.title = article.source.name
             requireActivity().loadImage(article.urlToImage ?: "", collapsingImage)
             titleTextView.text = article.title
             descriptionTextView.text = article.description
