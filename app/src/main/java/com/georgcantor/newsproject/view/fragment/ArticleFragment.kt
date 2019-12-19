@@ -1,7 +1,10 @@
 package com.georgcantor.newsproject.view.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.base.BaseFragment
@@ -26,10 +29,27 @@ class ArticleFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.article.observe(viewLifecycleOwner, Observer {
-            requireActivity().loadImage(it.urlToImage ?: "", collapsingImage)
-            titleTextView.text = it.title
-            descriptionTextView.text = it.description
+        viewModel.article.observe(viewLifecycleOwner, Observer { article ->
+            requireActivity().loadImage(article.urlToImage ?: "", collapsingImage)
+            titleTextView.text = article.title
+            descriptionTextView.text = article.description
+
+            fab.setOnClickListener {
+                val webPage = Uri.parse(article.url)
+                val intentBuilder: CustomTabsIntent.Builder = CustomTabsIntent.Builder()
+                intentBuilder.setToolbarColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.colorPrimary
+                    )
+                )
+                intentBuilder.setSecondaryToolbarColor(
+                    ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark)
+                )
+
+                val customTabsIntent: CustomTabsIntent = intentBuilder.build()
+                customTabsIntent.launchUrl(requireContext(), webPage)
+            }
         })
     }
 
