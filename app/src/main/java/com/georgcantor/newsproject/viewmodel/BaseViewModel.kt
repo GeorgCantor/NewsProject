@@ -1,4 +1,4 @@
-package com.georgcantor.newsproject.base
+package com.georgcantor.newsproject.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope

@@ -1,12 +1,14 @@
 package com.georgcantor.newsproject.view.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.newsproject.R
-import com.georgcantor.newsproject.base.BaseFragment
 import com.georgcantor.newsproject.model.data.Article
 import com.georgcantor.newsproject.model.remote.NetworkState
 import com.georgcantor.newsproject.view.adapter.NewsAdapter
@@ -18,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
+class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
 
     companion object {
         private const val QUERY = "query"
@@ -43,7 +45,11 @@ class NewsFragment : BaseFragment(), NewsAdapter.OnClickListener {
         shareDataViewModel = getSharedViewModel { parametersOf() }
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_news
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_news, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

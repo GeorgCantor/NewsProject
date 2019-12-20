@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.georgcantor.newsproject.base.BaseViewModel
 import com.georgcantor.newsproject.datasource.NewsDataSource
 import com.georgcantor.newsproject.datasource.NewsDataSourceFactory
 import com.georgcantor.newsproject.model.remote.NetworkState
