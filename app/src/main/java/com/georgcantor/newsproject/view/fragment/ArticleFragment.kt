@@ -3,6 +3,7 @@ package com.georgcantor.newsproject.view.fragment
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,7 @@ class ArticleFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getSharedViewModel { parametersOf() }
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -62,6 +64,13 @@ class ArticleFragment : Fragment() {
                 customTabsIntent.launchUrl(requireContext(), webPage)
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> requireActivity().onBackPressed()
+        }
+        return false
     }
 
 }

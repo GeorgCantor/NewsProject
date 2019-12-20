@@ -45,9 +45,9 @@ class TabsFragment : Fragment() {
         tabLayout.setupWithViewPager(viewPager)
 
         val adapter = ViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(NewsFragment.newInstance("nba"), "NBA")
-        adapter.addFragment(NewsFragment.newInstance("nfl"), "NFL")
-        adapter.addFragment(NewsFragment.newInstance("nhl"), "NHL")
+        adapter.addFragment(NewsFragment.newInstance("science"), "Science")
+        adapter.addFragment(NewsFragment.newInstance("finance"), "Finance")
+        adapter.addFragment(NewsFragment.newInstance("politics"), "Politics")
 
         viewPager.adapter = adapter
     }

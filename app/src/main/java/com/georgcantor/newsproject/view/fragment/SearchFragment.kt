@@ -3,11 +3,13 @@ package com.georgcantor.newsproject.view.fragment
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavOptions
@@ -35,6 +37,7 @@ class SearchFragment : Fragment(), NewsAdapter.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         shareDataViewModel = getSharedViewModel { parametersOf() }
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -45,6 +48,10 @@ class SearchFragment : Fragment(), NewsAdapter.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).setSupportActionBar(searchToolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         manager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         showKeyboard(searchView)
         checkQuery()
@@ -66,6 +73,16 @@ class SearchFragment : Fragment(), NewsAdapter.OnClickListener {
     }
 
     override fun onListUpdated(size: Int, networkState: NetworkState?) {
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                hideKeyboard()
+                requireActivity().onBackPressed()
+            }
+        }
+        return false
     }
 
     private fun setupRequest() {
