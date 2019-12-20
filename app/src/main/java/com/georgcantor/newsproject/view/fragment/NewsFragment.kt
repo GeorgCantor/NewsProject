@@ -38,12 +38,7 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
     private lateinit var viewModel: NewsViewModel
     private lateinit var shareDataViewModel: ShareDataViewModel
     private lateinit var adapter: NewsAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = getViewModel { parametersOf(arguments?.get(QUERY)) }
-        shareDataViewModel = getSharedViewModel { parametersOf() }
-    }
+    private var query: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,13 +48,19 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getNews()
-
-        newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = NewsAdapter(this)
-        newsRecyclerView.adapter = adapter
-
-        getNews()
+        query = arguments?.get(QUERY) as? String
+        if (!query.isNullOrEmpty()) {
+            viewModel = getViewModel { parametersOf(query) }
+            viewModel.getNews()
+            getNews()
+        } else {
+            shareDataViewModel = getSharedViewModel { parametersOf() }
+            shareDataViewModel.query.observe(viewLifecycleOwner, Observer {
+                viewModel = getViewModel { parametersOf(it) }
+                viewModel.getNews()
+                getNews()
+            })
+        }
     }
 
     override fun onClickRetry() {
@@ -67,6 +68,9 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
     }
 
     override fun onItemClick(article: Article) {
+        if (!::shareDataViewModel.isInitialized) {
+            shareDataViewModel = getSharedViewModel { parametersOf() }
+        }
         shareDataViewModel.setArticle(article)
         view?.let { Navigation.findNavController(it).navigate(R.id.articleFragment) }
     }
@@ -76,6 +80,10 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
     }
 
     private fun getNews() {
+        newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        adapter = NewsAdapter(this)
+        newsRecyclerView.adapter = adapter
+
         viewModel.networkState?.observe(viewLifecycleOwner, Observer(adapter::updateNetworkState))
         viewModel.news.observe(viewLifecycleOwner, Observer(adapter::submitList))
     }

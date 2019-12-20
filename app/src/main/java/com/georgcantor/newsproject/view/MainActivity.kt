@@ -7,16 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
 import com.georgcantor.newsproject.R
-import com.georgcantor.newsproject.util.shortToast
+import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_tabs.*
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.core.parameter.parametersOf
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var shareDataViewModel: ShareDataViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        shareDataViewModel = getViewModel { parametersOf() }
 
         val toggle = ActionBarDrawerToggle(
             this,
@@ -44,12 +49,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.abc -> shortToast(item.title)
-            R.id.bbc -> shortToast(item.title)
+            R.id.abc -> openNews(item.title.toString())
+            R.id.bbc -> openNews(item.title.toString())
         }
         drawerLayout.closeDrawer(GravityCompat.START)
 
         return true
+    }
+
+    private fun openNews(query: String) {
+        shareDataViewModel.setQuery(query)
+        Navigation.findNavController(this, R.id.navHostFragment).navigate(R.id.newsFragment)
     }
 
 }
