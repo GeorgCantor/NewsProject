@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.abc -> openNews(item.title.toString())
             R.id.bbc -> openNews(item.title.toString())
+            R.id.tags -> {
+                Navigation.findNavController(this, R.id.navHostFragment).navigate(R.id.tagsFragment)
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
 

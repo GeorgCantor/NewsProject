@@ -20,9 +20,9 @@
         <menu>
 
             <item
-                android:id="@+id/about"
+                android:id="@+id/tags"
                 android:icon="@drawable/ic_share"
-                android:title="About app" />
+                android:title="Tags" />
 
             <item
                 android:id="@+id/rate_us"

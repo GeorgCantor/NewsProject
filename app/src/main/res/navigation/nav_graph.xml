@@ -24,4 +24,9 @@
         android:name="com.georgcantor.newsproject.view.fragment.SearchFragment"
         android:label="SearchFragment" />
 
+    <fragment
+        android:id="@+id/tagsFragment"
+        android:name="com.georgcantor.newsproject.view.fragment.TagsFragment"
+        android:label="TagsFragment" />
+
 </navigation>
