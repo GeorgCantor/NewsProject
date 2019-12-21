@@ -68,8 +68,9 @@ class TagsFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        shareDataViewModel.setMainTags(selectedTopics)
         super.onDestroy()
+        shareDataViewModel.setMainTags(selectedTopics)
+        requireActivity().recreate()
     }
 
 }
