@@ -14,11 +14,10 @@ class TagsAdapter(
     private val clickListener: (String) -> Unit
 ) : RecyclerView.Adapter<TagsAdapter.TagViewHolder>() {
 
-    private val tags: MutableList<String>? = ArrayList()
+    private val tags: MutableList<String> = ArrayList()
 
     init {
-        this.tags?.clear()
-        this.tags?.addAll(tags)
+        this.tags.addAll(tags)
         notifyDataSetChanged()
     }
 
@@ -29,7 +28,7 @@ class TagsAdapter(
     }
 
     override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
-        this.tags?.let {
+        this.tags.let {
             val tag = it[position]
             holder.tagTextView.text = tag
             holder.tagTextView.setOnClickListener {
@@ -38,7 +37,7 @@ class TagsAdapter(
         }
     }
 
-    override fun getItemCount(): Int = tags?.size ?: 0
+    override fun getItemCount(): Int = tags.size
 
     class TagViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tagTextView: TextView = view.tagTextView

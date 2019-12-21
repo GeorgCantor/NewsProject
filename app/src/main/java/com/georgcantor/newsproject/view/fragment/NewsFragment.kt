@@ -65,7 +65,7 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
         } else {
             //open from drawer
             showToolbar()
-            shareDataViewModel = getSharedViewModel { parametersOf() }
+            shareDataViewModel = getSharedViewModel { parametersOf(null) }
             shareDataViewModel.query.observe(viewLifecycleOwner, Observer {
                 viewModel = getViewModel { parametersOf(it) }
                 viewModel.getNews()

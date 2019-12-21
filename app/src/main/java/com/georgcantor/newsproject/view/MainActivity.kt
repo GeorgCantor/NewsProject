@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
 import com.georgcantor.newsproject.R
+import com.georgcantor.newsproject.util.PreferenceManager
 import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,12 +17,17 @@ import org.koin.core.parameter.parametersOf
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    companion object {
+        const val MY_PREFS = "my_prefs"
+        const val TAGS = "tags"
+    }
+
     private lateinit var shareDataViewModel: ShareDataViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        shareDataViewModel = getViewModel { parametersOf() }
+        shareDataViewModel = getViewModel { parametersOf(PreferenceManager(this)) }
 
         val toggle = ActionBarDrawerToggle(
             this,

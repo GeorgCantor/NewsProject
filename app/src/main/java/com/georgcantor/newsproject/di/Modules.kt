@@ -2,6 +2,7 @@ package com.georgcantor.newsproject.di
 
 import com.georgcantor.newsproject.model.remote.ApiClient
 import com.georgcantor.newsproject.repository.NewsRepository
+import com.georgcantor.newsproject.util.PreferenceManager
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
 import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
 import com.georgcantor.newsproject.viewmodel.TagsViewModel
@@ -16,8 +17,8 @@ val viewModelModule = module {
     viewModel { (query: String) ->
         NewsViewModel(get(), query)
     }
-    viewModel {
-        ShareDataViewModel()
+    viewModel { (manager: PreferenceManager) ->
+        ShareDataViewModel(manager)
     }
     viewModel {
         TagsViewModel()

@@ -36,7 +36,7 @@ class SearchFragment : Fragment(), NewsAdapter.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        shareDataViewModel = getSharedViewModel { parametersOf() }
+        shareDataViewModel = getSharedViewModel { parametersOf(null) }
         setHasOptionsMenu(true)
     }
 

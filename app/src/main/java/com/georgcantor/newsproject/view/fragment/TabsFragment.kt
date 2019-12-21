@@ -6,17 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.georgcantor.newsproject.R
+import com.georgcantor.newsproject.util.PreferenceManager
 import com.georgcantor.newsproject.view.adapter.ViewPagerAdapter
+import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_tabs.*
+import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
+import org.koin.core.parameter.parametersOf
 
 class TabsFragment : Fragment() {
+
+    private lateinit var shareDataViewModel: ShareDataViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        shareDataViewModel =
+            getSharedViewModel { parametersOf(PreferenceManager(requireActivity())) }
     }
 
     override fun onCreateView(
@@ -44,12 +53,23 @@ class TabsFragment : Fragment() {
         }
         tabLayout.setupWithViewPager(viewPager)
 
-        val adapter = ViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(NewsFragment.newInstance("science"), "Science")
-        adapter.addFragment(NewsFragment.newInstance("finance"), "Finance")
-        adapter.addFragment(NewsFragment.newInstance("politics"), "Politics")
+        shareDataViewModel.getMainTags().observe(viewLifecycleOwner, Observer {
+            val adapter = ViewPagerAdapter(childFragmentManager)
+            adapter.addFragment(
+                NewsFragment.newInstance(it?.get(0) ?: getString(R.string.science)),
+                it?.get(0) ?: getString(R.string.science)
+            )
+            adapter.addFragment(
+                NewsFragment.newInstance(it?.get(1) ?: getString(R.string.finance)),
+                it?.get(1) ?: getString(R.string.finance)
+            )
+            adapter.addFragment(
+                NewsFragment.newInstance(it?.get(2) ?: getString(R.string.politics)),
+                it?.get(2) ?: getString(R.string.politics)
+            )
 
-        viewPager.adapter = adapter
+            viewPager.adapter = adapter
+        })
     }
 
 }
