@@ -12,6 +12,8 @@ interface ApiService {
     fun getNewsAsync(
         @Query("q") query: String,
         @Query("page") page: Int,
+        @Query("sortBy") sortBy: String = "publishedAt",
+        @Query("language") language: String = "en",
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): Deferred<News>
 
