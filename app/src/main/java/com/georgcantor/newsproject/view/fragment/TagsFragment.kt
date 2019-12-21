@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.util.PreferenceManager
-import com.georgcantor.newsproject.util.longToast
 import com.georgcantor.newsproject.view.adapter.TagsAdapter
 import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
 import com.georgcantor.newsproject.viewmodel.TagsViewModel
@@ -23,11 +22,14 @@ class TagsFragment : Fragment() {
     private lateinit var viewModel: TagsViewModel
     private lateinit var shareDataViewModel: ShareDataViewModel
     private lateinit var adapter: TagsAdapter
+    private var counter = 0
+    private val selectedTopics = arrayListOf("", "", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel { parametersOf() }
-        shareDataViewModel = getSharedViewModel { parametersOf(PreferenceManager(requireActivity())) }
+        shareDataViewModel =
+            getSharedViewModel { parametersOf(PreferenceManager(requireActivity())) }
     }
 
     override fun onCreateView(
@@ -43,11 +45,32 @@ class TagsFragment : Fragment() {
 
         viewModel.setTags()
         viewModel.tags.observe(viewLifecycleOwner, Observer {
-            adapter = TagsAdapter(it, requireActivity()::longToast)
+            adapter = TagsAdapter(it) { tag ->
+                when (counter) {
+                    0 -> {
+                        selectedTopics[0] = tag
+                        counter = 1
+                        firstTagTextView.text = tag
+                    }
+                    1 -> {
+                        selectedTopics[1] = tag
+                        counter = 2
+                        secondTagTextView.text = tag
+                    }
+                    2 -> {
+                        selectedTopics[2] = tag
+                        counter = 3
+                        thirdTagTextView.text = tag
+                    }
+                }
+            }
             tagsRecyclerView.adapter = adapter
         })
+    }
 
-        shareDataViewModel.setMainTags(arrayListOf("nba", "nfl", "pga"))
+    override fun onDestroy() {
+        shareDataViewModel.setMainTags(selectedTopics)
+        super.onDestroy()
     }
 
 }
