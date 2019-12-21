@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -42,6 +43,12 @@ fun View.visible() {
 
 fun View.gone() {
     visibility = View.GONE
+}
+
+fun View.setMarginTop(margin: Int) {
+    val params = layoutParams as ViewGroup.MarginLayoutParams
+    params.setMargins(params.leftMargin, margin, params.rightMargin, params.bottomMargin)
+    layoutParams = params
 }
 
 //fun LottieAnimationView.showAnimation() {

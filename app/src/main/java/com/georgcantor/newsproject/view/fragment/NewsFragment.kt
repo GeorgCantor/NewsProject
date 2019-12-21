@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.model.data.Article
 import com.georgcantor.newsproject.model.remote.NetworkState
+import com.georgcantor.newsproject.util.setMarginTop
 import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
 import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
@@ -19,6 +21,7 @@ import kotlinx.android.synthetic.main.item_network_state.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
+
 
 class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
 
@@ -54,6 +57,7 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
             viewModel.getNews()
             getNews()
         } else {
+            showToolbar()
             shareDataViewModel = getSharedViewModel { parametersOf() }
             shareDataViewModel.query.observe(viewLifecycleOwner, Observer {
                 viewModel = getViewModel { parametersOf(it) }
@@ -82,6 +86,14 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
 
     override fun onListUpdated(size: Int, networkState: NetworkState?) {
         setUpProgressBar(size, networkState)
+    }
+
+    private fun showToolbar() {
+        appBar.visibility = View.VISIBLE
+        (activity as AppCompatActivity).setSupportActionBar(newsToolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        refreshLayout.setMarginTop(140)
     }
 
     private fun getNews() {
