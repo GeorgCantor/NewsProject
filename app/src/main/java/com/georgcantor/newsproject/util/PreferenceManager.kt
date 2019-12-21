@@ -20,7 +20,7 @@ class PreferenceManager(activity: Activity) {
 
     fun saveInt(key: String, value: Int) = prefs.edit().putInt(key, value).apply()
 
-    fun saveTags(key: String, categories: ArrayList<String>) {
+    fun saveStringList(key: String, categories: ArrayList<String>) {
         json = gson.toJson(categories)
         prefs.edit().putString(key, json).apply()
     }
@@ -31,7 +31,7 @@ class PreferenceManager(activity: Activity) {
 
     fun getInt(key: String): Int = prefs.getInt(key, 0)
 
-    fun getTags(key: String): ArrayList<String>? {
+    fun getStringList(key: String): ArrayList<String>? {
         val type = object : TypeToken<ArrayList<String>>() {}.type
         val json = prefs.getString(key, "")
 

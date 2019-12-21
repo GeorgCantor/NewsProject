@@ -22,7 +22,7 @@ class ShareDataViewModel(private val prefManager: PreferenceManager?) : ViewMode
     }
 
     fun setMainTags(tags: ArrayList<String>) {
-        prefManager?.saveTags(TAGS, tags)
+        prefManager?.saveStringList(TAGS, tags)
     }
 
     fun getMainTags(): LiveData<ArrayList<String>> {
@@ -32,7 +32,7 @@ class ShareDataViewModel(private val prefManager: PreferenceManager?) : ViewMode
     }
 
     private fun getTagsFromPrefs() {
-        mainTags.value = prefManager?.getTags(TAGS)
+        mainTags.value = prefManager?.getStringList(TAGS)
     }
 
 }
