@@ -11,7 +11,7 @@ class ShareDataViewModel(private val prefManager: PreferenceManager?) : ViewMode
 
     val article = MutableLiveData<Article>()
     val query = MutableLiveData<String>()
-    var mainTags = MutableLiveData<ArrayList<String>?>()
+    private var mainTags = MutableLiveData<ArrayList<String>?>()
 
     fun setArticle(article: Article) {
         this.article.value = article

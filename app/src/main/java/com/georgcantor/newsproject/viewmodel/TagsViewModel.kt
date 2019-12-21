@@ -1,14 +1,15 @@
 package com.georgcantor.newsproject.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class TagsViewModel : ViewModel() {
 
-    val tags = MutableLiveData<ArrayList<String>>()
+    private val tags = MutableLiveData<ArrayList<String>>()
 
-    fun setTags() {
-        val tags = arrayListOf(
+    fun getTags(): LiveData<ArrayList<String>> {
+        tags.value = arrayListOf(
             "Science",
             "Politics",
             "Finance",
@@ -18,7 +19,8 @@ class TagsViewModel : ViewModel() {
             "Russia",
             "Trump"
         )
-        this.tags.value = tags
+
+        return tags
     }
 
 }

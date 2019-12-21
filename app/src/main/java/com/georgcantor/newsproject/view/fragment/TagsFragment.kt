@@ -43,8 +43,7 @@ class TagsFragment : Fragment() {
         tagsRecyclerView.setHasFixedSize(true)
         tagsRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
 
-        viewModel.setTags()
-        viewModel.tags.observe(viewLifecycleOwner, Observer {
+        viewModel.getTags().observe(viewLifecycleOwner, Observer {
             adapter = TagsAdapter(it) { tag ->
                 when (counter) {
                     0 -> {
