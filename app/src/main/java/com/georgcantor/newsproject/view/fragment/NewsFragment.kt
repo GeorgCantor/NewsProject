@@ -2,6 +2,7 @@ package com.georgcantor.newsproject.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +22,6 @@ import kotlinx.android.synthetic.main.item_network_state.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
-
 
 class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
 
@@ -43,6 +43,11 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
     private lateinit var adapter: NewsAdapter
     private var query: String? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,10 +58,12 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         query = arguments?.get(QUERY) as? String
         if (!query.isNullOrEmpty()) {
+            //open in tabs
             viewModel = getViewModel { parametersOf(query) }
             viewModel.getNews()
             getNews()
         } else {
+            //open from drawer
             showToolbar()
             shareDataViewModel = getSharedViewModel { parametersOf() }
             shareDataViewModel.query.observe(viewLifecycleOwner, Observer {
@@ -86,6 +93,13 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
 
     override fun onListUpdated(size: Int, networkState: NetworkState?) {
         setUpProgressBar(size, networkState)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> requireActivity().onBackPressed()
+        }
+        return false
     }
 
     private fun showToolbar() {
