@@ -61,6 +61,11 @@ class SearchFragment : Fragment(), NewsAdapter.OnClickListener {
         searchRecyclerView.adapter = adapter
 
         setupRequest()
+
+        searchRefreshLayout.setOnRefreshListener {
+            if (::viewModel.isInitialized) viewModel.retry()
+            searchRefreshLayout.isRefreshing = false
+        }
     }
 
     override fun onClickRetry() {

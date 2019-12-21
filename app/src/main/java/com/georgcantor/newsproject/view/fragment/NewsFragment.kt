@@ -61,6 +61,11 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
                 getNews()
             })
         }
+
+        refreshLayout.setOnRefreshListener {
+            if (::viewModel.isInitialized) viewModel.retry()
+            refreshLayout.isRefreshing = false
+        }
     }
 
     override fun onClickRetry() {
