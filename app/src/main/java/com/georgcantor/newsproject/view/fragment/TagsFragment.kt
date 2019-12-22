@@ -1,6 +1,5 @@
 package com.georgcantor.newsproject.view.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -43,7 +42,6 @@ class TagsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tagsToolbar.setTitleTextColor(Color.WHITE)
         (activity as AppCompatActivity).setSupportActionBar(tagsToolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

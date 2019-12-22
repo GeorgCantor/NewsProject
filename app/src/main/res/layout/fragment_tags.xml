@@ -22,7 +22,9 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/AppTheme" />
+            app:theme="@style/AppTheme"
+            app:title="Tags"
+            app:titleTextColor="@color/colorWhite" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
