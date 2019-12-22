@@ -24,8 +24,7 @@ class TabsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        shareDataViewModel =
-            getSharedViewModel { parametersOf(PreferenceManager(requireActivity())) }
+        shareDataViewModel = getSharedViewModel { parametersOf(PreferenceManager(requireActivity())) }
     }
 
     override fun onCreateView(
