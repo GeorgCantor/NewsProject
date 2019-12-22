@@ -56,7 +56,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.abc -> openNews(item.title.toString())
+            R.id.associated -> openNews(item.title.toString())
             R.id.bbc -> openNews(item.title.toString())
+            R.id.cnn -> openNews(item.title.toString())
+            R.id.google -> openNews(item.title.toString())
+            R.id.independent -> openNews(item.title.toString())
             R.id.tags -> {
                 Navigation.findNavController(this, R.id.navHostFragment).navigate(R.id.tagsFragment)
             }

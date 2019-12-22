@@ -5,28 +5,48 @@
 
         <item
             android:id="@+id/abc"
-            android:icon="@drawable/ic_bookmark_border_black"
-            android:title="ABC" />
+            android:icon="@drawable/ic_abc"
+            android:title="ABC News" />
+
+        <item
+            android:id="@+id/associated"
+            android:icon="@drawable/ic_associated"
+            android:title="Associated Press" />
 
         <item
             android:id="@+id/bbc"
-            android:icon="@drawable/ic_share"
-            android:title="BBC" />
+            android:icon="@drawable/ic_bbc"
+            android:title="BBC News" />
+
+        <item
+            android:id="@+id/cnn"
+            android:icon="@drawable/ic_cnn"
+            android:title="CNN" />
+
+        <item
+            android:id="@+id/google"
+            android:icon="@drawable/ic_google"
+            android:title="Google News" />
+
+        <item
+            android:id="@+id/independent"
+            android:icon="@drawable/ic_independent"
+            android:title="Independent" />
 
     </group>
 
-    <item android:title="Info">
+    <item android:title="Other">
 
         <menu>
 
             <item
                 android:id="@+id/tags"
-                android:icon="@drawable/ic_share"
+                android:icon="@drawable/ic_tags"
                 android:title="Tags" />
 
             <item
                 android:id="@+id/rate_us"
-                android:icon="@drawable/ic_bookmark_border_black"
+                android:icon="@drawable/ic_rate"
                 android:title="Rate us" />
 
         </menu>
