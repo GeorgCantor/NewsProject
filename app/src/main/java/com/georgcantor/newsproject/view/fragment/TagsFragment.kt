@@ -56,7 +56,6 @@ class TagsFragment : Fragment() {
                         selectedTopics[0] = tag
                         counter = 1
                         firstTagTextView.text = tag
-                        shareDataViewModel.setFabVisibility(true)
                     }
                     1 -> {
                         selectedTopics[1] = tag
@@ -67,6 +66,7 @@ class TagsFragment : Fragment() {
                         selectedTopics[2] = tag
                         counter = 3
                         thirdTagTextView.text = tag
+                        shareDataViewModel.setFabVisibility(true)
                     }
                 }
             }
@@ -79,6 +79,7 @@ class TagsFragment : Fragment() {
 
         tagsFab.setOnClickListener {
             shareDataViewModel.setMainTags(selectedTopics)
+            requireActivity().recreate()
             requireActivity().onBackPressed()
         }
     }
@@ -86,7 +87,5 @@ class TagsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         shareDataViewModel.setFabVisibility(false)
-        requireActivity().recreate()
     }
-
 }

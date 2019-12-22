@@ -12,6 +12,8 @@ data class Article(
 
     var publishedAt: String,
 
-    var source: Source
+    var source: Source,
+
+    var content: String
 
 )

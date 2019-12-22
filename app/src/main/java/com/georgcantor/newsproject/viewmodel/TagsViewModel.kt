@@ -17,7 +17,15 @@ class TagsViewModel : ViewModel() {
             "World",
             "USA",
             "Russia",
-            "Trump"
+            "Europe",
+            "NBA",
+            "NFL",
+            "NHL",
+            "Cars",
+            "Business",
+            "Lifestyle",
+            "China",
+            "MLB"
         )
 
         return tags

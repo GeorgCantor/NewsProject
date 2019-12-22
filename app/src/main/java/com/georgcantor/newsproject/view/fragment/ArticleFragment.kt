@@ -45,7 +45,7 @@ class ArticleFragment : Fragment() {
             articleToolbar.title = article.source.name
             requireActivity().loadImage(article.urlToImage ?: "", collapsingImage)
             titleTextView.text = article.title
-            descriptionTextView.text = article.description
+            descriptionTextView.text = article.content
 
             fab.setOnClickListener {
                 val webPage = Uri.parse(article.url)
