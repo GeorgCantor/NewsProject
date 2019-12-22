@@ -9,9 +9,10 @@ import com.georgcantor.newsproject.view.MainActivity.Companion.TAGS
 
 class ShareDataViewModel(private val prefManager: PreferenceManager?) : ViewModel() {
 
+    private var mainTags = MutableLiveData<ArrayList<String>?>()
     val article = MutableLiveData<Article>()
     val query = MutableLiveData<String>()
-    private var mainTags = MutableLiveData<ArrayList<String>?>()
+    val isFabVisible = MutableLiveData<Boolean>()
 
     fun setArticle(article: Article) {
         this.article.value = article
@@ -33,6 +34,10 @@ class ShareDataViewModel(private val prefManager: PreferenceManager?) : ViewMode
 
     private fun getTagsFromPrefs() {
         mainTags.value = prefManager?.getStringList(TAGS)
+    }
+
+    fun setFabVisibility(isVisible: Boolean) {
+        isFabVisible.value = isVisible
     }
 
 }

@@ -23,7 +23,13 @@ class TagsFragment : Fragment() {
     private lateinit var shareDataViewModel: ShareDataViewModel
     private lateinit var adapter: TagsAdapter
     private var counter = 0
-    private val selectedTopics = arrayListOf("", "", "")
+    private val selectedTopics by lazy {
+        arrayListOf(
+            getString(R.string.science),
+            getString(R.string.finance),
+            getString(R.string.politics)
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +56,7 @@ class TagsFragment : Fragment() {
                         selectedTopics[0] = tag
                         counter = 1
                         firstTagTextView.text = tag
+                        shareDataViewModel.setFabVisibility(true)
                     }
                     1 -> {
                         selectedTopics[1] = tag
@@ -65,11 +72,20 @@ class TagsFragment : Fragment() {
             }
             tagsRecyclerView.adapter = adapter
         })
+
+        shareDataViewModel.isFabVisible.observe(viewLifecycleOwner, Observer { visible ->
+            if (visible) tagsFab.show() else tagsFab.hide()
+        })
+
+        tagsFab.setOnClickListener {
+            shareDataViewModel.setMainTags(selectedTopics)
+            requireActivity().onBackPressed()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        shareDataViewModel.setMainTags(selectedTopics)
+        shareDataViewModel.setFabVisibility(false)
         requireActivity().recreate()
     }
 

@@ -1,5 +1,6 @@
 package com.georgcantor.newsproject.view.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -104,8 +105,8 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
 
     private fun showToolbar() {
         appBar.visibility = View.VISIBLE
+        newsToolbar.setTitleTextColor(Color.WHITE)
         (activity as AppCompatActivity).setSupportActionBar(newsToolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         refreshLayout.setMarginTop(140)
     }
