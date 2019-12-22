@@ -23,13 +23,7 @@ class TagsFragment : Fragment() {
     private lateinit var shareDataViewModel: ShareDataViewModel
     private lateinit var adapter: TagsAdapter
     private var counter = 0
-    private val selectedTopics by lazy {
-        arrayListOf(
-            getString(R.string.science),
-            getString(R.string.finance),
-            getString(R.string.politics)
-        )
-    }
+    private val selectedTopics = arrayListOf("", "", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
