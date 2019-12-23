@@ -45,6 +45,11 @@
                 android:title="Tags" />
 
             <item
+                android:id="@+id/saved_news"
+                android:icon="@drawable/ic_saved"
+                android:title="Saved news" />
+
+            <item
                 android:id="@+id/rate_us"
                 android:icon="@drawable/ic_rate"
                 android:title="Rate us" />
