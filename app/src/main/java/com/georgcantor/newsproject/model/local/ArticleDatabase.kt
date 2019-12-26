@@ -21,4 +21,6 @@ abstract class ArticleDatabase : RoomDatabase() {
                 .build()
     }
 
+    abstract fun dao(): ArticleDao
+
 }

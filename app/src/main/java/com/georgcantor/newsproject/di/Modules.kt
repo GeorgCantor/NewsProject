@@ -1,8 +1,10 @@
 package com.georgcantor.newsproject.di
 
+import com.georgcantor.newsproject.model.local.ArticleDatabase
 import com.georgcantor.newsproject.model.remote.ApiClient
 import com.georgcantor.newsproject.repository.NewsRepository
 import com.georgcantor.newsproject.util.PreferenceManager
+import com.georgcantor.newsproject.viewmodel.FavoritesViewModel
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
 import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
 import com.georgcantor.newsproject.viewmodel.TagsViewModel
@@ -23,8 +25,12 @@ val viewModelModule = module {
     viewModel {
         TagsViewModel()
     }
+    viewModel {
+        FavoritesViewModel(get())
+    }
 }
 
 val appModule = module {
     single { ApiClient.create(get()) }
+    single { ArticleDatabase.buildDefault(get()).dao() }
 }
