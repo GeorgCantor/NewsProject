@@ -45,10 +45,12 @@ class FavoritesFragment : Fragment() {
         viewModel.articles.observe(viewLifecycleOwner, Observer {
             newsRecyclerView.adapter = FavoritesAdapter(
                 requireContext(),
-                it as MutableList<Article>
-            ) { article ->
-                requireActivity().shortToast(article.title)
-            }
+                it as MutableList<Article>,
+                { article ->
+                    requireActivity().shortToast(article.title)
+                }, { article ->
+                    viewModel.deleteByUrl(article.url)
+                })
         })
     }
 

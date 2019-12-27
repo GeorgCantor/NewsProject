@@ -19,7 +19,8 @@
             android:layout_height="240dp"
             android:contentDescription="@string/news_image"
             android:scaleType="centerCrop"
-            card_view:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            card_view:layout_constraintBottom_toTopOf="@+id/saveButton"
+            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_launcher_background" />
@@ -28,7 +29,10 @@
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Save news"
             card_view:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/newsImageView" />
 
         <LinearLayout
