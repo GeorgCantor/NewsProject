@@ -30,6 +30,8 @@ class NewsAdapter(private val listener: OnClickListener) :
 
         fun onItemClick(article: Article)
 
+        fun onSaveClick(article: Article)
+
         fun onListUpdated(size: Int, networkState: NetworkState?)
     }
 

@@ -92,6 +92,10 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
         view?.let { Navigation.findNavController(it).navigate(R.id.articleFragment) }
     }
 
+    override fun onSaveClick(article: Article) {
+        viewModel.saveNews(article)
+    }
+
     override fun onListUpdated(size: Int, networkState: NetworkState?) {
         setUpProgressBar(size, networkState)
     }

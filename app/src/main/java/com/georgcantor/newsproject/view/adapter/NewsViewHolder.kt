@@ -20,6 +20,10 @@ class NewsViewHolder(private val parent: View) : RecyclerView.ViewHolder(parent)
             itemView.setOnClickListener {
                 listener.onItemClick(art)
             }
+
+            itemView.saveButton.setOnClickListener {
+                listener.onSaveClick(art)
+            }
         }
     }
 

@@ -17,7 +17,7 @@ val repositoryModule = module {
 
 val viewModelModule = module {
     viewModel { (query: String) ->
-        NewsViewModel(get(), query)
+        NewsViewModel(get(), get(), query)
     }
     viewModel { (manager: PreferenceManager) ->
         ShareDataViewModel(manager)

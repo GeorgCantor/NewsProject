@@ -56,7 +56,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.tags -> {
                 Navigation.findNavController(this, R.id.navHostFragment).navigate(R.id.tagsFragment)
             }
-            R.id.saved_news -> openNews(item.title.toString())
+            R.id.saved_news -> {
+                Navigation.findNavController(this, R.id.navHostFragment).navigate(R.id.favoritesFragment)
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
 

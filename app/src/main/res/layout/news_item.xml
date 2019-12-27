@@ -24,12 +24,19 @@
             card_view:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_launcher_background" />
 
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            card_view:layout_constraintTop_toBottomOf="@+id/newsImageView" />
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            card_view:layout_constraintTop_toBottomOf="@+id/newsImageView">
+            card_view:layout_constraintTop_toBottomOf="@+id/saveButton">
 
             <TextView
                 android:id="@+id/titleTextView"

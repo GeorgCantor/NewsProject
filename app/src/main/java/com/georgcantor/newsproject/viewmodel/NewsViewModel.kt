@@ -6,11 +6,15 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.georgcantor.newsproject.datasource.NewsDataSource
 import com.georgcantor.newsproject.datasource.NewsDataSourceFactory
+import com.georgcantor.newsproject.model.data.Article
+import com.georgcantor.newsproject.model.local.ArticleDao
 import com.georgcantor.newsproject.model.remote.NetworkState
 import com.georgcantor.newsproject.repository.NewsRepository
+import kotlinx.coroutines.launch
 
 class NewsViewModel(
     repository: NewsRepository,
+    private val dao: ArticleDao,
     query: String
 ) : BaseViewModel() {
 
@@ -24,6 +28,21 @@ class NewsViewModel(
     )
 
     fun getNews() = newsDataSource.create()
+
+    fun saveNews(article: Article) {
+        ioScope.launch {
+            dao.insert(
+                com.georgcantor.newsproject.model.local.Article(
+                    title = article.title,
+                    description = article.description,
+                    url = article.url,
+                    urlToImage = article.urlToImage,
+                    publishedAt = article.publishedAt,
+                    content = article.content
+                )
+            )
+        }
+    }
 
     fun retry() = newsDataSource.source.value?.retryFailedQuery()
 
