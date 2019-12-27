@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.model.data.Article
 import com.georgcantor.newsproject.model.remote.NetworkState
-import com.georgcantor.newsproject.util.setMarginTop
 import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
 import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
@@ -56,15 +55,18 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).setSupportActionBar(newsToolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         query = arguments?.get(QUERY) as? String
         if (!query.isNullOrEmpty()) {
             //open in tabs
+            appBar.visibility = View.GONE
             viewModel = getViewModel { parametersOf(query) }
             viewModel.getNews()
             getNews()
         } else {
             //open from drawer
-            showToolbar()
             shareDataViewModel = getSharedViewModel { parametersOf(null) }
             shareDataViewModel.query.observe(viewLifecycleOwner, Observer {
                 newsToolbar.title = it
@@ -105,13 +107,6 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
             android.R.id.home -> requireActivity().onBackPressed()
         }
         return false
-    }
-
-    private fun showToolbar() {
-        appBar.visibility = View.VISIBLE
-        (activity as AppCompatActivity).setSupportActionBar(newsToolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        refreshLayout.setMarginTop(140)
     }
 
     private fun getNews() {

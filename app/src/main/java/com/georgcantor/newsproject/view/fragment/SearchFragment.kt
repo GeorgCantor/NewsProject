@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.model.data.Article
 import com.georgcantor.newsproject.model.remote.NetworkState
-import com.georgcantor.newsproject.util.shortToast
 import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import com.georgcantor.newsproject.viewmodel.NewsViewModel
 import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
@@ -79,7 +78,7 @@ class SearchFragment : Fragment(), NewsAdapter.OnClickListener {
     }
 
     override fun onSaveClick(article: Article) {
-        requireContext().shortToast(article.title)
+        viewModel.saveNews(article)
     }
 
     override fun onListUpdated(size: Int, networkState: NetworkState?) {
