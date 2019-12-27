@@ -1,6 +1,7 @@
 package com.georgcantor.newsproject.view.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.georgcantor.newsproject.viewmodel.FavoritesViewModel
 import kotlinx.android.synthetic.main.fragment_news.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
+
 
 class FavoritesFragment : Fragment() {
 
@@ -34,9 +36,16 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+
+        refreshLayout.setOnRefreshListener {
+            setupRecyclerView()
+            refreshLayout.isRefreshing = false
+        }
     }
 
     private fun setupRecyclerView() {
+        val handler = Handler()
+
         val layoutManager = LinearLayoutManager(requireContext())
         newsRecyclerView.layoutManager = layoutManager
         newsRecyclerView.setHasFixedSize(true)
@@ -50,6 +59,10 @@ class FavoritesFragment : Fragment() {
                     requireActivity().shortToast(article.title)
                 }, { article ->
                     viewModel.deleteByUrl(article.url)
+                    handler.postDelayed(
+                        this::setupRecyclerView,
+                        500
+                    )
                 })
         })
     }
