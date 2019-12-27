@@ -2,7 +2,6 @@ package com.georgcantor.newsproject.util
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -24,17 +23,6 @@ fun <T> Context.openActivity(it: Class<T>, extras: Bundle.() -> Unit = {}) {
     val intent = Intent(this, it)
     intent.putExtras(Bundle().apply(extras))
     startActivity(intent)
-}
-
-fun Context.getScreenSize(): Int {
-    return when (this.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) {
-        Configuration.SCREENLAYOUT_SIZE_XLARGE -> 4
-        Configuration.SCREENLAYOUT_SIZE_UNDEFINED -> 3
-        Configuration.SCREENLAYOUT_SIZE_LARGE -> 3
-        Configuration.SCREENLAYOUT_SIZE_NORMAL -> 2
-        Configuration.SCREENLAYOUT_SIZE_SMALL -> 2
-        else -> 2
-    }
 }
 
 fun View.visible() {

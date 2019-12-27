@@ -9,18 +9,18 @@ import androidx.room.Query
 interface ArticleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(article: Article): Long
+    suspend fun insert(article: Article): Long
 
     @Query("DELETE FROM articles WHERE url = :url")
-    fun deleteByUrl(url: String)
+    suspend fun deleteByUrl(url: String)
 
     @Query("DELETE FROM articles")
-    fun deleteAll()
+    suspend fun deleteAll()
 
     @Query("SELECT * FROM articles WHERE url LIKE :url")
-    fun getByUrl(url: String): List<Article>
+    suspend fun getByUrl(url: String): List<Article>
 
     @Query("SELECT * FROM articles")
-    fun getAll(): List<Article>
+    suspend fun getAll(): List<Article>
 
 }

@@ -29,4 +29,9 @@
         android:name="com.georgcantor.newsproject.view.fragment.TagsFragment"
         android:label="TagsFragment" />
 
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.georgcantor.newsproject.view.fragment.FavoritesFragment"
+        android:label="FavoritesFragment" />
+
 </navigation>
