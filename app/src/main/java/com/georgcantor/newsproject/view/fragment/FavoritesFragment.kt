@@ -56,8 +56,6 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val handler = Handler()
-
         val layoutManager = LinearLayoutManager(requireContext())
         newsRecyclerView.layoutManager = layoutManager
         newsRecyclerView.setHasFixedSize(true)
@@ -71,7 +69,7 @@ class FavoritesFragment : Fragment() {
                     requireActivity().shortToast(article.title)
                 }, { article ->
                     viewModel.deleteByUrl(article.url)
-                    handler.postDelayed(
+                    Handler().postDelayed(
                         this::setupRecyclerView,
                         500
                     )
