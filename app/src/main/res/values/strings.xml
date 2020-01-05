@@ -13,4 +13,6 @@
     <string name="finance">Finance</string>
     <string name="politics">Politics</string>
     <string name="favorites">Favorites</string>
+
+    <string name="select_topics">Select topics to be displayed on the main screen</string>
 </resources>

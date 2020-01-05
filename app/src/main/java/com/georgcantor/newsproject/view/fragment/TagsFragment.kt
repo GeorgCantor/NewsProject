@@ -25,7 +25,7 @@ class TagsFragment : Fragment() {
     private lateinit var shareDataViewModel: ShareDataViewModel
     private lateinit var adapter: TagsAdapter
     private var counter = 0
-    private val selectedTopics by lazy { arrayListOf("", "", "") }
+    private val selectedTopics by lazy { ArrayList<String>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,20 +52,30 @@ class TagsFragment : Fragment() {
             adapter = TagsAdapter(it) { tag ->
                 when (counter) {
                     0 -> {
-                        selectedTopics[0] = tag
+                        selectedTopics.add(tag)
                         counter = 1
                         firstTagTextView.text = tag
                     }
                     1 -> {
-                        selectedTopics[1] = tag
+                        selectedTopics.add(tag)
                         counter = 2
                         secondTagTextView.text = tag
                     }
                     2 -> {
-                        selectedTopics[2] = tag
+                        selectedTopics.add(tag)
                         counter = 3
                         thirdTagTextView.text = tag
                         shareDataViewModel.setFabVisibility(true)
+                    }
+                    3 -> {
+                        selectedTopics.add(tag)
+                        counter = 4
+                        fourthTagTextView.text = tag
+                    }
+                    4 -> {
+                        selectedTopics.add(tag)
+                        counter = 5
+                        fifthTagTextView.text = tag
                     }
                 }
             }

@@ -2,6 +2,8 @@ package com.georgcantor.newsproject.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.georgcantor.newsproject.datasource.NewsDataSource
@@ -16,9 +18,9 @@ class NewsViewModel(
     repository: NewsRepository,
     private val dao: ArticleDao,
     query: String
-) : BaseViewModel() {
+) : ViewModel() {
 
-    private val newsDataSource = NewsDataSourceFactory(repository, query, ioScope)
+    private val newsDataSource = NewsDataSourceFactory(repository, query, viewModelScope)
 
     val news = LivePagedListBuilder(newsDataSource, pagedListConfig()).build()
 
@@ -30,7 +32,7 @@ class NewsViewModel(
     fun getNews() = newsDataSource.create()
 
     fun saveNews(article: Article) {
-        ioScope.launch {
+        viewModelScope.launch {
             dao.insert(
                 com.georgcantor.newsproject.model.local.Article(
                     title = article.title,

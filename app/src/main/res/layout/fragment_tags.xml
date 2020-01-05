@@ -36,7 +36,7 @@
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Choose 3 topics to be shown on the main screen"
+        android:text="@string/select_topics"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tagsLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,6 +83,30 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="3"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="@string/politics" />
+
+        <TextView
+            android:id="@+id/fourthTagTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="4"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="@string/politics" />
+
+        <TextView
+            android:id="@+id/fifthTagTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="5"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorPrimary"
             android:textSize="18sp"
