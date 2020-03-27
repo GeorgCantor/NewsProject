@@ -136,5 +136,4 @@ class SearchFragment : Fragment(), NewsAdapter.OnClickListener {
     private fun hideKeyboard() {
         manager.hideSoftInputFromWindow(requireActivity().window.decorView.rootView.windowToken, 0)
     }
-
 }

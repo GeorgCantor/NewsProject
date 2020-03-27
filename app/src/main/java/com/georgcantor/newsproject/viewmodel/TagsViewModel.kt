@@ -30,5 +30,4 @@ class TagsViewModel : ViewModel() {
 
         return tags
     }
-
 }

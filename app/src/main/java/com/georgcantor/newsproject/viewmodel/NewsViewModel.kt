@@ -53,5 +53,4 @@ class NewsViewModel(
         .setEnablePlaceholders(false)
         .setPageSize(5 * 2)
         .build()
-
 }

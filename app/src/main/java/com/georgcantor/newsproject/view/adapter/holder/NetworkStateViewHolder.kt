@@ -1,10 +1,11 @@
-package com.georgcantor.newsproject.view.adapter
+package com.georgcantor.newsproject.view.adapter.holder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.georgcantor.newsproject.model.remote.NetworkState
 import com.georgcantor.newsproject.util.gone
 import com.georgcantor.newsproject.util.visible
+import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import kotlinx.android.synthetic.main.item_network_state.view.*
 
 class NetworkStateViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
@@ -38,5 +39,4 @@ class NetworkStateViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
             }
         }
     }
-
 }

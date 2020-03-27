@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.georgcantor.newsproject.model.data.Article
+import com.georgcantor.newsproject.util.Constants.TAGS
 import com.georgcantor.newsproject.util.PreferenceManager
-import com.georgcantor.newsproject.view.MainActivity.Companion.TAGS
 
 class ShareDataViewModel(private val prefManager: PreferenceManager?) : ViewModel() {
 
@@ -39,5 +39,4 @@ class ShareDataViewModel(private val prefManager: PreferenceManager?) : ViewMode
     fun setFabVisibility(isVisible: Boolean) {
         isFabVisible.value = isVisible
     }
-
 }

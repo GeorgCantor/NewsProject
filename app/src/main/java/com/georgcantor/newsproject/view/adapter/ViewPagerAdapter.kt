@@ -28,5 +28,4 @@ class ViewPagerAdapter(manager: FragmentManager) :
         } catch (e: IllegalStateException) {
         }
     }
-
 }

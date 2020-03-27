@@ -42,5 +42,4 @@ class TagsAdapter(
     class TagViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tagTextView: TextView = view.tagTextView
     }
-
 }

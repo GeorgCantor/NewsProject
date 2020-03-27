@@ -1,7 +1,3 @@
 package com.georgcantor.newsproject.model.data
 
-data class Source(
-
-    var name: String
-
-)
+data class Source(var name: String)

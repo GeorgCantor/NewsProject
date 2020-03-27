@@ -55,5 +55,4 @@ class FavoritesAdapter(
         val articleImageView: ImageView = view.newsImageView
         val saveButton: Button = view.saveButton
     }
-
 }

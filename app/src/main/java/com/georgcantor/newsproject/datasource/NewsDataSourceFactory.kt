@@ -20,5 +20,4 @@ class NewsDataSourceFactory(
 
         return source
     }
-
 }

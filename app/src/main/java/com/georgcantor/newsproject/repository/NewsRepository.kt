@@ -8,5 +8,4 @@ class NewsRepository(private val apiService: ApiService) {
         query: String,
         page: Int
     ) = apiService.getNewsAsync(query, page).await().articles
-
 }

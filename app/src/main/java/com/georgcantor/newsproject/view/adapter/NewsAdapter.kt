@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.model.data.Article
 import com.georgcantor.newsproject.model.remote.NetworkState
+import com.georgcantor.newsproject.view.adapter.holder.NetworkStateViewHolder
+import com.georgcantor.newsproject.view.adapter.holder.NewsViewHolder
 
 class NewsAdapter(private val listener: OnClickListener) :
     PagedListAdapter<Article, RecyclerView.ViewHolder>(diffCallback) {
@@ -38,8 +40,12 @@ class NewsAdapter(private val listener: OnClickListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         return when (viewType) {
-            R.layout.news_item -> NewsViewHolder(view)
-            R.layout.item_network_state -> NetworkStateViewHolder(view)
+            R.layout.news_item -> NewsViewHolder(
+                view
+            )
+            R.layout.item_network_state -> NetworkStateViewHolder(
+                view
+            )
             else -> throw IllegalArgumentException("Unknown viewType: $viewType")
         }
     }
@@ -75,6 +81,7 @@ class NewsAdapter(private val listener: OnClickListener) :
         val hadExtraRow = hasExtraRow()
         this.networkState = newNetworkState
         val hasExtraRow = hasExtraRow()
+
         if (hadExtraRow != hasExtraRow) {
             if (hadExtraRow) {
                 notifyItemRemoved(super.getItemCount())
@@ -87,5 +94,4 @@ class NewsAdapter(private val listener: OnClickListener) :
     }
 
     private fun hasExtraRow() = networkState != null && networkState != NetworkState.SUCCESS
-
 }

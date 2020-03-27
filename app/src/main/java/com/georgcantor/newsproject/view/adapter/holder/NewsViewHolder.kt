@@ -1,9 +1,10 @@
-package com.georgcantor.newsproject.view.adapter
+package com.georgcantor.newsproject.view.adapter.holder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.georgcantor.newsproject.model.data.Article
 import com.georgcantor.newsproject.util.loadImage
+import com.georgcantor.newsproject.view.adapter.NewsAdapter
 import kotlinx.android.synthetic.main.news_item.view.*
 
 class NewsViewHolder(private val parent: View) : RecyclerView.ViewHolder(parent) {
@@ -26,5 +27,4 @@ class NewsViewHolder(private val parent: View) : RecyclerView.ViewHolder(parent)
             }
         }
     }
-
 }

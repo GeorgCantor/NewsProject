@@ -7,12 +7,29 @@
     <fragment
         android:id="@+id/tabsFragment"
         android:name="com.georgcantor.newsproject.view.fragment.TabsFragment"
-        android:label="TabsFragment" />
+        android:label="TabsFragment" >
+        <action
+            android:id="@+id/action_tabsFragment_to_tagsFragment"
+            app:destination="@id/tagsFragment" />
+        <action
+            android:id="@+id/action_tabsFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_tabsFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_tabsFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.georgcantor.newsproject.view.fragment.NewsFragment"
-        android:label="NewsFragment" />
+        android:label="NewsFragment" >
+        <action
+            android:id="@+id/action_newsFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/articleFragment"

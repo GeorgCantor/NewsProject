@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.util.PreferenceManager
 import com.georgcantor.newsproject.viewmodel.ShareDataViewModel
@@ -16,11 +17,6 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    companion object {
-        const val MY_PREFS = "my_prefs"
-        const val TAGS = "tags"
-    }
 
     private lateinit var shareDataViewModel: ShareDataViewModel
 
@@ -41,8 +37,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navView.setNavigationItemSelectedListener(this)
         navView.itemIconTintList = null
-
-        Navigation.findNavController(this, R.id.navHostFragment).navigate(R.id.tabsFragment)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -54,10 +48,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.google -> openNews(item.title.toString())
             R.id.independent -> openNews(item.title.toString())
             R.id.tags -> {
-                Navigation.findNavController(this, R.id.navHostFragment).navigate(R.id.tagsFragment)
+                findNavController(this, R.id.navHostFragment).navigate(R.id.action_tabsFragment_to_tagsFragment)
             }
             R.id.saved_news -> {
-                Navigation.findNavController(this, R.id.navHostFragment).navigate(R.id.favoritesFragment)
+                findNavController(this, R.id.navHostFragment).navigate(R.id.action_tabsFragment_to_favoritesFragment)
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -75,7 +69,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun openNews(query: String) {
         shareDataViewModel.setQuery(query)
-        Navigation.findNavController(this, R.id.navHostFragment).navigate(R.id.newsFragment)
+        findNavController(this, R.id.navHostFragment).navigate(R.id.action_tabsFragment_to_newsFragment)
     }
-
 }

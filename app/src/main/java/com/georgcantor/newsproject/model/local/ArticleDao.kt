@@ -22,5 +22,4 @@ interface ArticleDao {
 
     @Query("SELECT * FROM articles")
     suspend fun getAll(): List<Article>
-
 }

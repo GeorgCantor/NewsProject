@@ -31,7 +31,7 @@ class TagsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         viewModel = getViewModel { parametersOf() }
-        shareDataViewModel = getSharedViewModel { parametersOf(PreferenceManager(requireActivity())) }
+        shareDataViewModel = getSharedViewModel { parametersOf(PreferenceManager(requireContext())) }
     }
 
     override fun onCreateView(
@@ -104,5 +104,4 @@ class TagsFragment : Fragment() {
         super.onDestroy()
         shareDataViewModel.setFabVisibility(false)
     }
-
 }

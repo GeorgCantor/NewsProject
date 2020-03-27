@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.newsproject.R
 import com.georgcantor.newsproject.model.data.Article
@@ -110,7 +111,6 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
     }
 
     private fun getNews() {
-        newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = NewsAdapter(this)
         newsRecyclerView.adapter = adapter
 
@@ -122,5 +122,4 @@ class NewsFragment : Fragment(), NewsAdapter.OnClickListener {
         progressBar?.visibility =
             if (size == 0 && networkState == NetworkState.RUNNING) View.VISIBLE else View.GONE
     }
-
 }

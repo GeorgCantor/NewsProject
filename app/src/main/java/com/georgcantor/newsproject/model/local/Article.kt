@@ -27,5 +27,4 @@ data class Article(
             var content = "content"
         }
     }
-
 }

@@ -70,5 +70,4 @@ class NewsDataSource(
         retryQuery = null
         prevQuery?.invoke()
     }
-
 }

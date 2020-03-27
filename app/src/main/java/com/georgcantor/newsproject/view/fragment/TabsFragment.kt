@@ -24,8 +24,7 @@ class TabsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        shareDataViewModel =
-            getSharedViewModel { parametersOf(PreferenceManager(requireActivity())) }
+        shareDataViewModel = getSharedViewModel { parametersOf(PreferenceManager(requireContext())) }
     }
 
     override fun onCreateView(
@@ -55,7 +54,7 @@ class TabsFragment : Fragment() {
 
         shareDataViewModel.getMainTags().observe(viewLifecycleOwner, Observer {
             val adapter = ViewPagerAdapter(childFragmentManager)
-            it.map {
+            it?.map {
                 adapter.addFragment(
                     NewsFragment.newInstance(it),
                     it
@@ -65,5 +64,4 @@ class TabsFragment : Fragment() {
             viewPager.adapter = adapter
         })
     }
-
 }

@@ -72,5 +72,4 @@ class ArticleFragment : Fragment() {
         }
         return false
     }
-
 }
