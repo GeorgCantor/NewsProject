@@ -33,45 +33,6 @@ fun View.gone() {
     visibility = View.GONE
 }
 
-fun View.setMarginTop(margin: Int) {
-    val params = layoutParams as ViewGroup.MarginLayoutParams
-    params.setMargins(params.leftMargin, margin, params.rightMargin, params.bottomMargin)
-    layoutParams = params
-}
-
-//fun LottieAnimationView.showAnimation() {
-//    this.visibility = View.VISIBLE
-//    this.playAnimation()
-//    this.loop(true)
-//}
-//
-//fun LottieAnimationView.showSingleAnimation(speed: Float) {
-//    val animation = this
-//    this.visibility = View.VISIBLE
-//    this.playAnimation()
-//    this.repeatCount = 0
-//    this.speed = speed
-//    this.addAnimatorListener(object : Animator.AnimatorListener {
-//        override fun onAnimationRepeat(p0: Animator?) {
-//        }
-//
-//        override fun onAnimationEnd(p0: Animator?) {
-//            animation.gone()
-//        }
-//
-//        override fun onAnimationCancel(p0: Animator?) {
-//        }
-//
-//        override fun onAnimationStart(p0: Animator?) {
-//        }
-//    })
-//}
-//
-//fun LottieAnimationView.hideAnimation() {
-//    this.loop(false)
-//    this.gone()
-//}
-
 fun Context.shortToast(message: CharSequence) =
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
@@ -112,26 +73,9 @@ fun Context.loadImage(
     url: String,
     view: ImageView
 ) {
-
     Glide.with(this)
         .load(url)
         .placeholder(R.drawable.ic_launcher_background)
         .thumbnail(0.1F)
-        .listener(object : RequestListener<Drawable> {
-            override fun onLoadFailed(
-                e: GlideException?,
-                model: Any,
-                target: Target<Drawable>,
-                isFirstResource: Boolean
-            ): Boolean = false
-
-            override fun onResourceReady(
-                resource: Drawable,
-                model: Any,
-                target: Target<Drawable>,
-                dataSource: DataSource,
-                isFirstResource: Boolean
-            ): Boolean = false
-        })
         .into(view)
 }
